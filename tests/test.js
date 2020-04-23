@@ -99,7 +99,7 @@ describe("channels", () => {
     afterEach(() => knex("channels").del());
 
     it("creates a channel", () =>
-      models.channels.create(params).then((channel) =>
+      models.channels.create(params).then((channel) => {
         expect(channel).to.include({ name: params.name });
         expect(channel.id).to.be.a("number");
       }));
