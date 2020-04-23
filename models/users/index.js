@@ -1,5 +1,5 @@
 const moment = require("moment");
-
+// { id: 52, username: 'rp-3', created_at: 2020-04-23T08:11:59.365Z }
 const User = function(dbUser) {
   this.id = dbUser.id;
   this.username = dbUser.username;

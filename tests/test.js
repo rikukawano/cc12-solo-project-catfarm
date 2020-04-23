@@ -9,7 +9,7 @@ const forcePromiseReject = () => {
 };
 
 describe("users", () => {
-  describe("setup", () => {
+  describe("tup", () => {
     it("able to connect to database", () =>
       knex
         .raw("select 1+1 as result")
@@ -99,7 +99,7 @@ describe("channels", () => {
     afterEach(() => knex("channels").del());
 
     it("creates a channel", () =>
-      models.channels.create(params).then((channel) => {
+      models.channels.create(params).then((channel) =>
         expect(channel).to.include({ name: params.name });
         expect(channel.id).to.be.a("number");
       }));
@@ -145,7 +145,7 @@ describe("channels", () => {
   });
 });
 
-describe("channel_messages", () => {
+xdescribe("channel_messages", () => {
   let fromId;
   let channelId;
   let otherChannelId;
@@ -240,7 +240,7 @@ describe("channel_messages", () => {
   });
 });
 
-describe("user_messages", () => {
+xdescribe("user_messages", () => {
   let fromId;
   let toId;
   let otherToId;
