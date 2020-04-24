@@ -6,7 +6,18 @@ module.exports = (knex, UserMessage) => {
       .orWhere("from_id", params.toId)
       .orWhere("to_id", params.fromId)
       .then((userMessages) => {
-        return Promise.all(userMessages.map((userMessage) => {}));
+        return Promise.all(
+          userMessages.map(async (userMessage) => {
+            const username = await knex
+              .select("username")
+              .from("users")
+              .where("id", userMessage.from_id)
+              .first();
+
+            userMessage.fromUser = username.username;
+            return userMessage;
+          })
+        );
       });
   };
 };
