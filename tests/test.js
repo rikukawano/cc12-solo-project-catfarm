@@ -145,7 +145,7 @@ describe("channels", () => {
   });
 });
 
-xdescribe("channel_messages", () => {
+describe("channel_messages", () => {
   let fromId;
   let channelId;
   let otherChannelId;
@@ -240,7 +240,7 @@ xdescribe("channel_messages", () => {
   });
 });
 
-xdescribe("user_messages", () => {
+describe.only("user_messages", () => {
   let fromId;
   let toId;
   let otherToId;

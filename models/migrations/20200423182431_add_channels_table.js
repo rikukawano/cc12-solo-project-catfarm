@@ -2,7 +2,9 @@ exports.up = function(knex, Promise) {
   return knex.schema.createTable("channels", (t) => {
     t.increments().index();
 
-    t.integer("channel_id")
+    t.integer("channel_id").unique();
+
+    t.string("name")
       .unique()
       .notNullable();
 
