@@ -3,22 +3,22 @@ const validateUsername = (uName) =>
 
 module.exports = (knex, User) => {
   return (params) => {
-    const username = params.username;
+    const userName = params.username;
 
-    if (!validateUsername(username)) {
+    if (!validateUsername(userName)) {
       return Promise.reject(
         new Error("Username must be provided, and be at least two characters")
       );
     }
 
     return knex("users")
-      .insert({ username: username.toLowerCase() })
+      .insert({ username: userName })
       .then(() => {
         return knex("users")
-          .where({ username: username.toLowerCase() })
-          .select();
+          .where({ username: userName })
+          .first();
       })
-      .then((users) => new User(users.pop())) // create a user model out of the plain database response
+      .then((users) => new User(users))
       .catch((err) => {
         // sanitize known errors
         if (

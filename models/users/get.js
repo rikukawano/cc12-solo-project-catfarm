@@ -1,14 +1,14 @@
 module.exports = (knex, User) => {
   return (params) => {
-    const username = params.username;
+    const userName = params.username;
 
     return knex("users")
-      .where({ username: username.toLowerCase() })
+      .where({ username: userName })
       .select()
       .then((users) => {
         if (users.length) return new User(users.pop());
 
-        throw new Error(`Error finding user ${username}`);
+        throw new Error(`Error finding user ${userName}`);
       });
   };
 };

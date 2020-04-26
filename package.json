@@ -9,7 +9,8 @@
     "start": "node index.js",
     "migrate": "knex migrate:latest --knexfile models/knexfile.js",
     "rollback": "knex migrate:rollback --knexfile models/knexfile.js ",
-    "precommit": "pretty-quick --staged"
+    "precommit": "pretty-quick --staged",
+    "dev": "nodemon ./index.js"
   },
   "author": "Code Chrysalis",
   "license": "UNLICENSED",
@@ -21,6 +22,7 @@
     "knex": "^0.15.2",
     "moment": "^2.22.2",
     "morgan": "^1.9.1",
+    "nodemon": "^2.0.3",
     "pg": "^7.5.0"
   },
   "devDependencies": {

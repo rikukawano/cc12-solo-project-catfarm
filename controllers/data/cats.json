@@ -1,0 +1,46 @@
+{
+  "cats": [
+    {
+      "id": 1,
+      "name": "Nyan Cat",
+      "buyPrice": 100,
+      "sellPrice": 300,
+      "url": "https://media.giphy.com/media/7lsw8RenVcjCM/200_d.gif"
+    },
+    {
+      "id": 2,
+      "name": "Gameboy Cat",
+      "buyPrice": 500,
+      "sellPrice": 800,
+      "url": "https://i.pinimg.com/originals/40/23/21/402321430b4dab768c62ce2e72f53409.gif"
+    },
+    {
+      "id": 3,
+      "name": "Pikachu Cat",
+      "buyPrice": 800,
+      "sellPrice": 1000,
+      "url": "https://i.gifer.com/2HuZ.gif"
+    },
+    {
+      "id": 4,
+      "name": "nYan Cat",
+      "buyPrice": 1000,
+      "sellPrice": 10000,
+      "url": "https://i.gifer.com/ha9.gif"
+    },
+    {
+      "id": 5,
+      "name": "Party Cat",
+      "buyPrice": 600,
+      "sellPrice": 1000,
+      "url": "https://data.whicdn.com/images/24012141/original.gif"
+    },
+    {
+      "id": 6,
+      "name": "Donut Cat",
+      "buyPrice": 200,
+      "sellPrice": 300,
+      "url": "https://i.gifer.com/56Bu.gif"
+    }
+  ]
+}

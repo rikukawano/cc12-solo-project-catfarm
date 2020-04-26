@@ -4,28 +4,18 @@ app.controller("MessagesController", [
   "$http",
   function($scope, $http) {
     $scope.user = {};
-    $scope.users = [];
-    $scope.channels = [];
-    $scope.messageTarget = null;
-    $scope.currentChannel = null;
-    $scope.currentUser = null;
+    $scope.userCats = [];
     $scope.usernameRecieved = false;
-    $scope.currentMessages = [];
 
-    const getUsers = function() {
-      $http.get("http://localhost:3000/api/users").then((response) => {
-        $scope.users = response.data;
-      });
-    };
-
-    const getChannels = function() {
-      $http.get("http://localhost:3000/api/channels").then((response) => {
-        $scope.channels = response.data;
-      });
+    const getCats = function() {
+      $http
+        .get(`http://localhost:3000/api/cats/${$scope.user.id}`)
+        .then((response) => {
+          $scope.userCats = response.data;
+        });
     };
 
     $scope.signIn = function(e) {
-      //post the new user and then get all the existing users and channels
       const postData = { username: $("#username-input")[0].value };
       $http({
         method: "POST",
@@ -35,72 +25,44 @@ app.controller("MessagesController", [
       }).then((response) => {
         $scope.usernameRecieved = true;
         $scope.user = response.data;
-        getUsers();
-        getChannels();
+        getCats();
       });
     };
 
-    $scope.refreshUsers = () => getUsers();
-    $scope.refreshChannels = () => getChannels();
-
-    $scope.sendMessage = function() {
-      //post message to server and refresh the messages displayed
-      if ($scope.messageTarget === "user") {
-        const postData = {
-          fromId: $scope.user.id,
-          message: $("#messageArea")[0].value,
-        };
-        $http({
-          method: "POST",
-          url: `http://localhost:3000/api/users/${
-            $scope.currentUser.id
-          }/messages`,
-          data: postData,
-          headers: { "Content-Type": "application/json" },
-        }).then((response) => {
-          $scope.currentMessages = response.data;
-          $("#messageArea")[0].value = "";
+    const getUser = function() {
+      $http
+        .get(`http://localhost:3000/api/users/${$scope.user.username}`)
+        .then((response) => {
+          $scope.user = response.data;
         });
-      } else if ($scope.messageTarget === "channel") {
-        const postData = {
-          fromId: $scope.user.id,
-          message: $("#messageArea")[0].value,
-        };
-        $http({
-          method: "POST",
-          url: `http://localhost:3000/api/channels/${
-            $scope.currentChannel.id
-          }/messages`,
-          data: postData,
-          headers: { "Content-Type": "application/json" },
-        }).then((response) => {
-          $scope.currentMessages = response.data;
-          $("#messageArea")[0].value = "";
-        });
-      }
     };
 
-    $scope.getUser = function(userIndex) {
-      $scope.messageTarget = "user";
-      $scope.currentUser = $scope.users[userIndex];
+    $scope.buyCat = function(id) {
+      const postData = {
+        cat_id: id,
+        owner_id: $scope.user.id,
+      };
+      $http({
+        method: "POST",
+        url: `http://localhost:3000/api/cats`,
+        data: postData,
+        headers: { "Content-Type": "application/json" },
+      }).then((response) => {
+        $scope.userCats = response.data;
+        getUser();
+        getCats();
+      });
+    };
+
+    $scope.sellCat = function(cat) {
       $http
-        .get(
-          `http://localhost:3000/api/users/${
-            $scope.currentUser.id
-          }/messages?fromId=${$scope.user.id}`
+        .delete(
+          `http://localhost:3000/api/cats/${cat.id}/${cat.name}/${$scope.user.id}`
         )
         .then((response) => {
-          $scope.currentMessages = response.data;
-        });
-    };
-
-    $scope.getChannel = function(channelIndex) {
-      $scope.messageTarget = "channel";
-      $scope.currentChannel = $scope.channels[channelIndex];
-      $http
-        .get(`http://localhost:3000/api/channels/${$scope.currentChannel.id}`)
-        .then((response) => {
-          $scope.currentMessages = response.data;
+          $scope.userCats = response.data;
+          getUser();
+          getCats();
         });
     };
   },

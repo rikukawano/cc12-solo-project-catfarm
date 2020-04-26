@@ -3,6 +3,7 @@ const moment = require("moment");
 const User = function(dbUser) {
   this.id = dbUser.id;
   this.username = dbUser.username;
+  this.money = dbUser.money;
   this.createdAt = new Date(dbUser.created_at);
 };
 
@@ -13,6 +14,7 @@ User.prototype.serialize = function() {
   return {
     id: this.id,
     username: this.username,
+    money: this.money,
     createdAt: moment(this.createdAt).format("hh:mm:ss"),
   };
 };
@@ -20,7 +22,7 @@ User.prototype.serialize = function() {
 module.exports = (knex) => {
   return {
     create: require("./create")(knex, User),
-    list: require("./list")(knex, User),
     get: require("./get")(knex, User),
+    update: require("./update")(knex, User),
   };
 };
