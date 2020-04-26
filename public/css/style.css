@@ -1,10 +1,12 @@
 html {
   height: 100%; /* make sure it is at least as tall as the viewport */
-  position: relative;
 }
 body {
   height: 100%; /* force the BODY element to match the height of the HTML element */
   font-family: "Press Start 2P", cursive !important;
+  background-image: url(https://i.gifer.com/PAq.gif);
+  display: flex;
+  justify-content: center;
 }
 
 .sign-in-btn {
@@ -16,48 +18,35 @@ body {
   height: 100%;
 }
 
-.content {
-  margin-left: 20%;
-}
-
-#side-nav-height {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 20%;
-  overflow: scroll;
-  background-color: #6d54f5;
-}
-
 .message-area-height {
   margin-bottom: 100px;
 }
 
-.side-menu-header,
-.side-menu-items {
-  padding: 10px;
-  margin: 0;
+.content-wrapper {
+  text-align: center;
 }
 
-.side-menu-header {
-  border-bottom: 1px solid #3e546b;
-  color: #a2b0b9;
+.refresh {
+  color: orange;
+  margin-left: 20px;
 }
 
 li {
   list-style-type: none;
 }
 
-.side-menu-items {
-  color: #a2b0b9;
-  background-color: #17232f;
+.nav-item {
+  color: white;
 }
 
-.side-menu-items:hover,
-.refresh:hover {
-  cursor: pointer;
-  color: #c5d2da;
+.navbar-nav {
+  margin-top: 10px;
+}
+
+.users-money {
+  margin-left: 30px;
+  color: orange;
+  font-size: 18px;
 }
 
 .refresh {
@@ -68,45 +57,44 @@ li {
   margin: 0;
   padding: 5px 20px;
 }
-
+.sell-buy-btn {
+  position: absolute;
+  right: 10px;
+}
 .message-list:first-child {
   margin-top: 20px;
 }
 
 .message-item {
-  background-color: #f6f6f6;
+  background-color: #f8f8f8;
+  width: 500px;
   border-radius: 10px;
   margin-bottom: 10px;
   padding: 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .message-info {
   font-weight: bold;
 }
 
-.message-box {
-  position: absolute;
-  bottom: 0;
-  width: 80%;
-  padding: 20px;
-  margin: 0 !important;
-  background-color: #ccc;
-  position: fixed;
-  overflow: hidden;
+.shop-btn {
+  width: 200px;
 }
-
 .message-input {
   float: left;
   width: 80% !important;
   border-radius: 4px 0 0 4px !important;
 }
 
+img {
+  margin-right: 20px;
+}
+
 .message-button {
   float: right;
   width: 20%;
   border-radius: 0 4px 4px 0 !important;
-}
-
-.chat-name {
-  padding-left: 20px;
 }

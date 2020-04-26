@@ -1,3 +1,5 @@
+This was created during my time as a student at Code Chrysalis.
+
 # Cat Farm
 
 Cat Farm is a game where you can grow cats of many different kinds starting with everyone's favorite, the Nyan Cat.

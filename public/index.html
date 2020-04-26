@@ -29,260 +29,256 @@
   </head>
 
   <body ng-app="myApp">
-    <div ng-controller="MessagesController">
+    <div class="content-wrapper" ng-controller="MessagesController">
       <!-- side nav -->
-      <nav id="side-nav-height">
-        <div
-          class="side-menu-header"
-          ng-model="username"
-          ng-if="usernameRecieved === true"
-        >
-          <h4>Welcome {{user.username}}</h4>
-        </div>
+      <nav class="navbar  justify-content-center">
+        <ul class="navbar-nav">
+          <li
+            class="nav-item"
+            ng-model="username"
+            ng-if="usernameRecieved === true"
+          >
+            <h4>{{user.username}}'s Farm</h4>
+          </li>
 
-        <!-- user stats -->
-        <h5 class="side-menu-header">
-          <i class="fa fa-bitcoin"></i>
-          <span class="user-money">
-            {{user.money}}
-          </span>
-        </h5>
+          <!-- user stats -->
+          <li class="nav-item users-money" ng-if="usernameRecieved === true">
+            <i class="fa fa-bitcoin fa-2x"></i>
+            <span class="user-money">
+              {{user.money}}
+            </span>
+          </li>
+        </ul>
       </nav>
+      <!-- if not signed in then don't show user data -->
+      <div ng-if="usernameRecieved === false" class="sign-in-btn">
+        <!-- Modal for username -->
 
-      <!-- messages area -->
-      <div class="content">
-        <!-- if not signed in then don't show user data -->
-        <div ng-if="usernameRecieved === false" class="sign-in-btn">
-          <!-- Modal for username -->
+        <!-- Trigger the modal with a button -->
+        <button
+          type="button"
+          class="btn btn-danger btn-lg"
+          data-toggle="modal"
+          data-target="#myModal"
+        >
+          Click to sign in!
+        </button>
 
-          <!-- Trigger the modal with a button -->
-          <button
-            type="button"
-            class="btn btn-danger btn-lg"
-            data-toggle="modal"
-            data-target="#myModal"
-          >
-            Click to sign in!
-          </button>
-
-          <!-- Modal -->
-          <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-              <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">
-                    &times;
-                  </button>
-                  <h4 class="modal-title">
-                    Enter a new username or existing username
-                  </h4>
-                </div>
-                <div class="modal-body modal-body">
-                  <input
-                    id="username-input"
-                    ng-model="username"
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter username"
-                  />
-                </div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-success"
-                    data-dismiss="modal"
-                    ng-click="signIn()"
-                  >
-                    Sign in
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end of modal code -->
-        <div class="message-area-height" ng-if="usernameRecieved === true">
-          <ul class="message-list" ng-repeat="cat in userCats">
-            <li class="message-item">
-              <button
-                type="button"
-                class="btn btn-success btn-lg"
-                ng-click="sellCat(cat)"
-              >
-                SELL
-              </button>
-              <img src="{{cat.url}}" alt="cat-gif" width="100" />
-              <span class="message-info">
-                {{cat.name}}
-              </span>
-              <span class="refresh">
-                <i class="fa fa-bitcoin"></i>{{cat.sellPrice}}
-              </span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- TODO CREATE MY NYAN CATS (LIST) -->
-        <div class="form-group message-box">
-          <!-- TODO SHOW CAT -->
-          <button
-            type="button"
-            class="btn btn-success btn-lg"
-            data-toggle="modal"
-            data-target="#shop"
-          >
-            Shop
-          </button>
-        </div>
         <!-- Modal -->
-        <div class="modal fade" id="shop" role="dialog">
+        <div class="modal fade" id="myModal" role="dialog">
           <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
               <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                  &times;
+                </button>
                 <h4 class="modal-title">
-                  Shop
+                  Enter a new username or existing username
                 </h4>
-                <span class="user-money">
-                  <i class="fa fa-bitcoin"></i>{{user.money}}
-                </span>
               </div>
               <div class="modal-body modal-body">
-                <ul class="message-list">
-                  <li class="message-item">
-                    <button
-                      type="button"
-                      class="btn btn-success btn-lg"
-                      ng-click="buyCat(1)"
-                      ng-show="user.money >= 100"
-                    >
-                      BUY
-                    </button>
-                    <img
-                      src="https://media.giphy.com/media/7lsw8RenVcjCM/200_d.gif"
-                      alt="cat-gif"
-                      width="100"
-                    />
-                    <span class="message-info">
-                      Nyan Cat
-                    </span>
-                    <span class="refresh">
-                      <i class="fa fa-bitcoin"></i>100
-                    </span>
-                  </li>
-                  <li class="message-item">
-                    <button
-                      type="button"
-                      class="btn btn-success btn-lg"
-                      ng-click="buyCat(2)"
-                      ng-show="user.money >= 500"
-                    >
-                      BUY
-                    </button>
-                    <img
-                      src="https://i.pinimg.com/originals/40/23/21/402321430b4dab768c62ce2e72f53409.gif"
-                      alt="cat-gif"
-                      width="100"
-                    />
-                    <span class="message-info">
-                      Gameboy Cat
-                    </span>
-                    <span class="refresh">
-                      <i class="fa fa-bitcoin"></i>500
-                    </span>
-                  </li>
-                  <li class="message-item">
-                    <button
-                      type="button"
-                      class="btn btn-success btn-lg"
-                      ng-click="buyCat(3)"
-                      ng-show="user.money >= 800"
-                    >
-                      BUY
-                    </button>
-                    <img
-                      src="https://i.gifer.com/2HuZ.gif"
-                      alt="cat-gif"
-                      width="100"
-                    />
-                    <span class="message-info">
-                      Pikachu Cat
-                    </span>
-                    <span class="refresh">
-                      <i class="fa fa-bitcoin"></i>800
-                    </span>
-                  </li>
-                  <li class="message-item">
-                    <button
-                      type="button"
-                      class="btn btn-success btn-lg"
-                      ng-click="buyCat(4)"
-                      ng-show="user.money >= 1000"
-                    >
-                      BUY
-                    </button>
-                    <img
-                      src="https://i.gifer.com/ha9.gif"
-                      alt="cat-gif"
-                      width="100"
-                    />
-                    <span class="message-info">
-                      nYan Cat
-                    </span>
-                    <span class="refresh">
-                      <i class="fa fa-bitcoin"></i>1000
-                    </span>
-                  </li>
-                  <li class="message-item">
-                    <button
-                      type="button"
-                      class="btn btn-success btn-lg"
-                      ng-click="buyCat(5)"
-                      ng-show="user.money >= 600"
-                    >
-                      BUY
-                    </button>
-                    <img
-                      src="https://data.whicdn.com/images/24012141/original.gif"
-                      alt="cat-gif"
-                      width="100"
-                    />
-                    <span class="message-info">
-                      Party Cat
-                    </span>
-                    <span class="refresh">
-                      <i class="fa fa-bitcoin"></i>600
-                    </span>
-                  </li>
-                  <li class="message-item">
-                    <button
-                      type="button"
-                      class="btn btn-success btn-lg"
-                      ng-click="buyCat(6)"
-                      ng-show="user.money >= 200"
-                    >
-                      BUY
-                    </button>
-                    <img
-                      src="https://i.gifer.com/56Bu.gif"
-                      alt="cat-gif"
-                      width="100"
-                    />
-                    <span class="message-info">
-                      Donut Cat
-                    </span>
-                    <span class="refresh">
-                      <i class="fa fa-bitcoin"></i>200
-                    </span>
-                  </li>
-                </ul>
+                <input
+                  id="username-input"
+                  ng-model="username"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter username"
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  data-dismiss="modal"
+                  ng-click="signIn()"
+                >
+                  Sign in
+                </button>
               </div>
             </div>
           </div>
         </div>
-        <!-- end of modal code -->
       </div>
+      <!-- end of modal code -->
+      <div class="message-area-height" ng-if="usernameRecieved === true">
+        <div class="message-list" ng-repeat="cat in userCats">
+          <div class="message-item">
+            <button
+              type="button"
+              class="btn btn-success btn-lg sell-buy-btn"
+              ng-click="sellCat(cat)"
+            >
+              SELL
+            </button>
+            <img src="{{cat.url}}" alt="cat-gif" height="50" />
+            <span class="message-info">
+              {{cat.name}}
+            </span>
+            <span class="refresh">
+              <i class="fa fa-bitcoin fa-2x"></i>{{cat.sellPrice}}
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="shop" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">
+                Shop
+              </h4>
+              <span class="user-money">
+                <i class="fa fa-bitcoin fa-2x"></i>{{user.money}}
+              </span>
+            </div>
+            <div class="modal-body modal-body">
+              <div class="message-list">
+                <div class="message-item">
+                  <button
+                    type="button"
+                    class="btn btn-success btn-lg sell-buy-btn"
+                    ng-click="buyCat(1)"
+                    ng-show="user.money >= 100"
+                  >
+                    BUY
+                  </button>
+                  <img
+                    src="https://media.giphy.com/media/7lsw8RenVcjCM/200_d.gif"
+                    alt="cat-gif"
+                    height="50"
+                  />
+                  <span class="message-info">
+                    Nyan Cat
+                  </span>
+                  <span class="refresh">
+                    <i class="fa fa-bitcoin fa-2x"></i>100
+                  </span>
+                </div>
+                <div class="message-item">
+                  <button
+                    type="button"
+                    class="btn btn-success btn-lg sell-buy-btn"
+                    ng-click="buyCat(2)"
+                    ng-show="user.money >= 500"
+                  >
+                    BUY
+                  </button>
+                  <img
+                    src="https://i.pinimg.com/originals/40/23/21/402321430b4dab768c62ce2e72f53409.gif"
+                    alt="cat-gif"
+                    height="50"
+                  />
+                  <span class="message-info">
+                    Gameboy Cat
+                  </span>
+                  <span class="refresh">
+                    <i class="fa fa-bitcoin fa-2x"></i>500
+                  </span>
+                </div>
+                <div class="message-item">
+                  <button
+                    type="button"
+                    class="btn btn-success btn-lg sell-buy-btn"
+                    ng-click="buyCat(3)"
+                    ng-show="user.money >= 800"
+                  >
+                    BUY
+                  </button>
+                  <img
+                    src="https://i.gifer.com/2HuZ.gif"
+                    alt="cat-gif"
+                    height="50"
+                  />
+                  <span class="message-info">
+                    Pikachu Cat
+                  </span>
+                  <span class="refresh">
+                    <i class="fa fa-bitcoin fa-2x"></i>800
+                  </span>
+                </div>
+                <div class="message-item">
+                  <button
+                    type="button"
+                    class="btn btn-success btn-lg sell-buy-btn"
+                    ng-click="buyCat(4)"
+                    ng-show="user.money >= 1000"
+                  >
+                    BUY
+                  </button>
+                  <img
+                    src="https://i.gifer.com/ha9.gif"
+                    alt="cat-gif"
+                    height="50"
+                  />
+                  <span class="message-info">
+                    nYan Cat
+                  </span>
+                  <span class="refresh">
+                    <i class="fa fa-bitcoin fa-2x"></i>1000
+                  </span>
+                </div>
+                <div class="message-item">
+                  <button
+                    type="button"
+                    class="btn btn-success btn-lg sell-buy-btn"
+                    ng-click="buyCat(5)"
+                    ng-show="user.money >= 600"
+                  >
+                    BUY
+                  </button>
+                  <img
+                    src="https://data.whicdn.com/images/24012141/original.gif"
+                    alt="cat-gif"
+                    height="50"
+                  />
+                  <span class="message-info">
+                    Party Cat
+                  </span>
+                  <span class="refresh">
+                    <i class="fa fa-bitcoin fa-2x"></i>600
+                  </span>
+                </div>
+                <div class="message-item">
+                  <button
+                    type="button"
+                    class="btn btn-success btn-lg sell-buy-btn"
+                    ng-click="buyCat(6)"
+                    ng-show="user.money >= 200"
+                  >
+                    BUY
+                  </button>
+                  <img
+                    src="https://i.gifer.com/56Bu.gif"
+                    alt="cat-gif"
+                    height="50"
+                  />
+                  <span class="message-info">
+                    Donut Cat
+                  </span>
+                  <span class="refresh">
+                    <i class="fa fa-bitcoin fa-2x"></i>200
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end of modal code -->
+      <!-- TODO CREATE MY NYAN CATS (LIST) -->
+      <!-- TODO SHOW CAT -->
+      <button
+        type="button"
+        class="btn btn-success btn-lg shop-btn"
+        data-toggle="modal"
+        data-target="#shop"
+        ng-if="usernameRecieved === true"
+      >
+        Shop
+      </button>
     </div>
 
     <!-- Modules -->
